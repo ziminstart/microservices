@@ -39,4 +39,16 @@ public interface IPassPortControllerApi {
               HttpServletRequest request,
               HttpServletResponse response);
 
+
+    /**
+     * 注销登录
+     *
+     * @return
+     */
+    @ApiOperation(value = "用户退出登录", notes = "用户退出登录", httpMethod = "POST")
+    @PostMapping("/logout")
+    R logout(@RequestParam String userId,
+             HttpServletRequest request,
+             HttpServletResponse response);
+
 }

@@ -9,6 +9,7 @@ import com.imooc.model.bo.RegisterLoginBO;
 import com.imooc.model.pojo.AppUser;
 import com.imooc.user.iservice.IAppUserService;
 import com.imooc.utils.IPUtil;
+import com.imooc.utils.JsonUtils;
 import com.imooc.utils.SMSUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,14 +94,31 @@ public class PassPortController extends BaseController implements IPassPortContr
             //保存token到redis
             String uToken = UUID.randomUUID().toString();
             redis.set(REDIS_USER_TOKEN + ":" + user.getId(), uToken);
+            redis.set(REDIS_USER_INFO + ":" + user.getId(), JsonUtils.objectToJson(user));
             //保存用户id和token到cookie中
             setCookie(request, response, "utoken", uToken, COOKIE_MONTH);
-            setCookie(request, response, "uid", uToken, COOKIE_MONTH);
+            setCookie(request, response, "uid", user.getId(), COOKIE_MONTH);
         }
         // 用户登录成功或注册以后，需要删除redis中缓存的验证码
         redis.del(MOBILE_SMS_CODE + ":" + mobile);
         //返回用户状态
         return R.ok(activeStatus);
     }
+
+
+    /**
+     * 注销登录
+     *
+     * @return
+     */
+    @Override
+    public R logout(String userId, HttpServletRequest request, HttpServletResponse response) {
+        //清除redis中的数据
+        redis.del(REDIS_USER_TOKEN + ":" + userId);
+        setCookie(request,response,"utoken","",COOKIE_DELETE);
+        setCookie(request,response,"uid","",COOKIE_DELETE);
+        return R.ok();
+    }
+
 
 }

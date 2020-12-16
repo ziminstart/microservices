@@ -1,6 +1,7 @@
 package com.imooc.user.iservice;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.imooc.model.bo.UpdateUserInfoBO;
 import com.imooc.model.pojo.AppUser;
 
 /**
@@ -26,5 +27,17 @@ public interface IAppUserService extends IService<AppUser> {
      * @return
      */
     AppUser createUser(String mobile);
+
+    /**
+     * 根据用户主键Id查询用户信息
+     * @param userId
+     * @return
+     */
+    AppUser getUser(String userId);
+
+    /**
+     * 用户修改信息，完善资料，并且激活
+     */
+    void updateUserInfo(UpdateUserInfoBO updateUserInfoBO);
 
 }
