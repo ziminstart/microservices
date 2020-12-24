@@ -1,10 +1,9 @@
-package com.imooc.model.vo;
+package com.imooc.files.vo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 /**
  * <p>

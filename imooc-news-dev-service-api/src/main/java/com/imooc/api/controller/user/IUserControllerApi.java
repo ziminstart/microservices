@@ -2,7 +2,7 @@ package com.imooc.api.controller.user;
 
 
 import com.imooc.grace.result.R;
-import com.imooc.model.bo.UpdateUserInfoBO;
+import com.imooc.files.bo.UpdateUserInfoBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.BindingResult;

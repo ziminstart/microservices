@@ -11,6 +11,7 @@
         <module>imooc-news-dev-common</module>
         <module>imooc-news-dev-model</module>
         <module>imooc-news-dev-service-api</module>
+        <module>imooc-news-dev-service-files</module>
         <module>imooc-news-dev-service-user</module>
         <module>imooc-news-dev-code-generator</module>
     </modules>

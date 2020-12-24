@@ -1,10 +1,8 @@
-package com.imooc.model.bo;
+package com.imooc.files.bo;
 
 import lombok.Data;
-import lombok.NonNull;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author zimin

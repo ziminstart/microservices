@@ -1,19 +1,16 @@
 package com.imooc.user.controller;
 
 import com.imooc.api.BaseController;
-import com.imooc.api.controller.user.IHelloControllerApi;
 import com.imooc.api.controller.user.IUserControllerApi;
 import com.imooc.grace.result.R;
 import com.imooc.grace.result.ResponseStatusEnum;
-import com.imooc.model.bo.UpdateUserInfoBO;
-import com.imooc.model.pojo.AppUser;
-import com.imooc.model.vo.AppUserVO;
-import com.imooc.model.vo.UserAccountInfoVO;
+import com.imooc.files.bo.UpdateUserInfoBO;
+import com.imooc.files.pojo.AppUser;
+import com.imooc.files.vo.AppUserVO;
+import com.imooc.files.vo.UserAccountInfoVO;
 import com.imooc.user.iservice.IAppUserService;
 import com.imooc.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;

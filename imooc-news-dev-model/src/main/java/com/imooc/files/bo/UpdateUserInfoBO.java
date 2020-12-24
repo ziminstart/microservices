@@ -1,4 +1,4 @@
-package com.imooc.model.bo;
+package com.imooc.files.bo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

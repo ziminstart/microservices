@@ -1,8 +1,8 @@
 package com.imooc.user.iservice;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.imooc.model.bo.UpdateUserInfoBO;
-import com.imooc.model.pojo.AppUser;
+import com.imooc.files.bo.UpdateUserInfoBO;
+import com.imooc.files.pojo.AppUser;
 
 /**
  * <p>
