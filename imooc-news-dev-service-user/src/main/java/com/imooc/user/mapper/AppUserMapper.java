@@ -1,7 +1,7 @@
 package com.imooc.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.imooc.files.pojo.AppUser;
+import com.imooc.model.pojo.AppUser;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

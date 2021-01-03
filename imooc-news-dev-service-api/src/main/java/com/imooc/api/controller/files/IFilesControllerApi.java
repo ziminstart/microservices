@@ -2,13 +2,14 @@ package com.imooc.api.controller.files;
 
 
 import com.imooc.grace.result.R;
+import com.imooc.model.bo.NewAdminBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author zimin
@@ -41,4 +42,40 @@ public interface IFilesControllerApi {
     @PostMapping("/uploadFace")
     R uploadFace(@RequestParam String userId, MultipartFile file) throws Exception;
 
+
+    /**
+     * 文件上传到mongodb的gridfs
+     *
+     * @param newAdminBO
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/uploadToGridFS")
+    R uploadToGridFS(@RequestBody NewAdminBO newAdminBO) throws Exception;
+
+
+    /**
+     * 查询人脸图片
+     *
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/readInGridFS")
+    void readInGridFS(@RequestParam String faceId,
+                      HttpServletRequest request,
+                      HttpServletResponse response) throws Exception;
+
+
+    /**
+     * 从gridfs中读取图片数据
+     * @param faceId
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    @GetMapping("/readFace64InGridFS")
+    R readFace64InGridFS(@RequestParam String faceId,
+                      HttpServletRequest request,
+                      HttpServletResponse response) throws Exception;
 }

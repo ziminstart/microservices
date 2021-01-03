@@ -5,6 +5,7 @@
 #
 ##########################################################################
 server:
+#  port: 8003
   tomcat:
     uri-encoding: UTF-8
     max-swallow-size: -1  #tomcat默认为2M 超过2M的文件不会被捕获，需要调整此处大小为-1
@@ -16,30 +17,26 @@ server:
 ##########################################################################
 spring:
   application:
-    name: service-files
+    name: service-admin
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  servlet:
-    multipart:
-      max-file-size: 512000 #请求的文件大小限制为500Kb
-      max-request-size: 512000
   profiles:
     active: dev #yml 中配置文件的环境配置，dev开发环境，test测试环境，prod生产环境
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/imooc-news-dev?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
   data:
     mongodb:
       uri: mongodb://root:123456@127.0.0.1:27017
       database: imooc-news
 
-##########################################################################
-#
-# fastdfs的配置信息
-#
-##########################################################################
-fdfs:
-  #连接时间
-  connect-timeout: 30
-  #读取时间
-  so-timeout: 30
-  # tracke服务的地址
-  tracker-list: 192.168.1.155:3333
+
+#mybatis-plus 配置
+mybatis-plus:
+  type-aliases-package: com.gegeda.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

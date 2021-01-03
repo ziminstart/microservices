@@ -6,6 +6,9 @@ import com.imooc.utils.RedisOperator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author zimin
  * @function 共公的interceptor方法
@@ -17,6 +20,7 @@ public class BaseInterceptor {
 
     public static final String REDIS_USER_TOKEN = "redis_user_token";
     public static final String REDIS_USER_INFO = "redis_user_info";
+    public static final String REDIS_ADMIN_TOKEN = "redis_admin_token";
 
 
     public boolean verifyUserIdToken(String userId, String token, String redisKeyPrefix) {
@@ -36,6 +40,21 @@ public class BaseInterceptor {
             return false;
         }
         return true;
+    }
+
+    // 从cookie中取值
+    public String getCookie(HttpServletRequest request, String key) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return null;
+        }
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(key)){
+                String value = cookie.getValue();
+                return value;
+            }
+        }
+        return null;
     }
 
 }

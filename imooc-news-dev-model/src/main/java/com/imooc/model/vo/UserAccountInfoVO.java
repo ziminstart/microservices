@@ -1,4 +1,4 @@
-package com.imooc.files.vo;
+package com.imooc.model.vo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

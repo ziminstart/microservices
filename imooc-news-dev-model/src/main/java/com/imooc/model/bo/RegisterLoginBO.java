@@ -1,4 +1,4 @@
-package com.imooc.files.bo;
+package com.imooc.model.bo;
 
 import lombok.Data;
 

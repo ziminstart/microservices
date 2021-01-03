@@ -3,7 +3,7 @@ package com.imooc.api.interceptors;
 import com.imooc.enums.UserStatus;
 import com.imooc.exception.GraceException;
 import com.imooc.grace.result.ResponseStatusEnum;
-import com.imooc.files.pojo.AppUser;
+import com.imooc.model.pojo.AppUser;
 import com.imooc.utils.JsonUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;

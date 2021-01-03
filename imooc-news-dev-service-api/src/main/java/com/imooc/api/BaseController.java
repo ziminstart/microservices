@@ -36,8 +36,14 @@ public class BaseController {
      */
     public static final String REDIS_USER_TOKEN = "redis_user_token";
     public static final String REDIS_USER_INFO = "redis_user_info";
+    public static final String REDIS_ADMIN_TOKEN= "redis_admin_token";
+
     public static final Integer COOKIE_MONTH = 30 * 24 * 60 * 60;
     public static final Integer COOKIE_DELETE= 0;
+
+
+    public static final Integer COMMON_START_PAGE= 1;
+    public static final Integer COMMON_PAGE_SIZE= 10;
 
     @Value("${website.domain-name}")
     public String DOMAIN_NAME;
@@ -85,6 +91,22 @@ public class BaseController {
         cookie.setDomain(DOMAIN_NAME);
         cookie.setPath("/");
         response.addCookie(cookie);
+    }
+
+    /**
+     * 删除cookie
+     * @param request
+     * @param response
+     * @param cookieName
+     */
+    public void deleteCookie(HttpServletRequest request,HttpServletResponse response,String cookieName){
+        try {
+            String deleteValue = URLEncoder.encode("","utf-8");
+            setCookieValue(request,response,cookieName,deleteValue,COOKIE_DELETE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

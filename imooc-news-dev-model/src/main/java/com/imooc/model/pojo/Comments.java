@@ -1,4 +1,4 @@
-package com.imooc.files.pojo;
+package com.imooc.model.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.TableId;
