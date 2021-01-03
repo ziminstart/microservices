@@ -5,6 +5,7 @@ import com.imooc.grace.result.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -37,7 +38,7 @@ public interface IFilesControllerApi {
      * @return
      */
     @ApiOperation(value = "上传用户头像", notes = "上传用户头像", httpMethod = "POST")
-    @GetMapping("/uploadFace")
+    @PostMapping("/uploadFace")
     R uploadFace(@RequestParam String userId, MultipartFile file) throws Exception;
 
 }
