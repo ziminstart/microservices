@@ -2,10 +2,15 @@ package com.imooc.api.controller.article;
 
 
 import com.imooc.grace.result.R;
+import com.imooc.model.bo.NewArticleBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.validation.Valid;
 
 /**
  * @author zimin
@@ -27,17 +32,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  *  此外，本工程的接口其实就是一套规范。实现都是由各自的工程去做的处理
  */
-@Api(value = "文章管理",tags = {"文章的controller"})
-@RequestMapping("")
+@Api(value = "文章业务的controller",tags = {"文章业务的controller"})
+@RequestMapping("categoryMng")
 public interface IArticleControllerApi {
 
 
-    /**
-     *
-     * @return
-     */
     @ApiOperation(value = "hello方法的接口",notes = "hello方法的接口",httpMethod = "GET")
-    @GetMapping("/hello")
-    R hello();
+    @GetMapping("/createArticle")
+    R createArticle(@RequestBody @Valid NewArticleBO newArticleBO, BindingResult bindingResult);
 
 }

@@ -34,7 +34,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/categoryMng")
 public interface ICategoryControllerApi {
 
-
     /**
      *
      * @return
@@ -44,7 +43,11 @@ public interface ICategoryControllerApi {
     R getCatList();
 
 
-    @ApiOperation(value = "获取文章分类列表",notes = "获取文章分类列表",httpMethod = "POST")
+    @ApiOperation(value = "获取文章分类列表",notes = "获取文章分类列表",httpMethod = "GET")
+    @GetMapping("/getCats")
+    R getCats();
+
+    @ApiOperation(value = "新增或者修改分类",notes = "新增或者修改分类",httpMethod = "POST")
     @PostMapping("/saveOrUpdateCategory")
     R saveOrUpdateCategory(@RequestBody Category category);
 

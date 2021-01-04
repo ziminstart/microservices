@@ -1,7 +1,8 @@
-package com.imooc.user.mapper;
+package com.imooc.article.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.imooc.model.pojo.Article;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.imooc.model.pojo.Article;
  * @author 恒利
  * @since 2020-12-09
  */
+@Mapper
 public interface ArticleMapper extends BaseMapper<Article> {
 
 }

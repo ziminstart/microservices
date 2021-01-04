@@ -24,6 +24,8 @@ import sun.misc.BASE64Decoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zimin
@@ -77,6 +79,49 @@ public class FileUploadController implements IFilesControllerApi {
 
         log.info("path:{}", finalPath);
         return R.ok(finalPath);
+    }
+
+    @Override
+    public R uploadSomeFiles(String userId, MultipartFile[] files) throws Exception {
+        //声明一个list,用于存放多个图片地址路径,返回到前端
+        List<String> imageUrlList= new ArrayList<>();
+
+        if (files != null && files.length > 0){
+            for (MultipartFile file : files) {
+                String path = null;
+                if (file != null) {
+                    //获取文件上传名称
+                    String fileName = file.getOriginalFilename();
+                    //判断文件名不能为空
+                    if (!StringUtils.isEmpty(fileName)) {
+                        String[] fileNameArr = fileName.split("\\.");
+                        //获得后缀
+                        String suffix = fileNameArr[fileNameArr.length - 1];
+                        //判断后缀符合我们的预定义的规范
+                        if (!suffix.equalsIgnoreCase("png")
+                                && !suffix.equalsIgnoreCase("jpg")
+                                && !suffix.equalsIgnoreCase("jpeg")) {
+                            continue;
+                        }
+//                path = uploadService.uploadFdfs(file, suffix);
+                        path = uploadService.uploadOSS(file, userId, suffix);
+                    } else {
+                        continue;
+                    }
+                } else {
+                    continue;
+                }
+                String finalPath = "";
+                if (StringUtils.isEmpty(path)) {
+                    continue;
+                } else {
+                    finalPath = fileResource.getOssHost() + path;
+                    //FIXME:放入到list之前对图片进行审核
+                    imageUrlList.add(finalPath);
+                }
+            }
+        }
+        return R.ok(imageUrlList);
     }
 
     @Override

@@ -36,11 +36,24 @@ public interface IFilesControllerApi {
 
 
     /**
+     * 上传单图
      * @return
      */
     @ApiOperation(value = "上传用户头像", notes = "上传用户头像", httpMethod = "POST")
     @PostMapping("/uploadFace")
     R uploadFace(@RequestParam String userId, MultipartFile file) throws Exception;
+
+
+    /**
+     * 上传多个文件
+     * @param userI
+     * @param file
+     * @return
+     * @throws Exception
+     */
+    @ApiOperation(value = "上传多个文件", notes = "上传多个文件", httpMethod = "POST")
+    @PostMapping("/uploadSomeFiles")
+    R uploadSomeFiles(@RequestParam String userId, MultipartFile[] files) throws Exception;
 
 
     /**
