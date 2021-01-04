@@ -1,4 +1,4 @@
-package com.imooc.api.controller.user;
+package com.imooc.api.controller;
 
 
 import com.imooc.grace.result.R;

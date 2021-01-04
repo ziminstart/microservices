@@ -1,6 +1,6 @@
 package com.imooc.files.controller;
 
-import com.imooc.api.controller.user.IHelloControllerApi;
+import com.imooc.api.controller.IHelloControllerApi;
 import com.imooc.grace.result.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
