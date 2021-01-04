@@ -1,5 +1,6 @@
 package com.imooc.admin.controller;
 
+import com.imooc.admin.iservice.IFriendLinkService;
 import com.imooc.admin.repository.FriendLinkRepository;
 import com.imooc.admin.service.FriendLinkBiz;
 import com.imooc.api.BaseController;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,7 +25,7 @@ import java.util.Map;
 public class FriendLinkController extends BaseController implements IFriendLinkControllerApi {
 
     @Autowired
-    private FriendLinkBiz friendLinkBiz;
+    private IFriendLinkService friendLinkService;
 
     @Override
     public R saveOrUpdateFriendLink(@Valid SaveFriendLinkBO saveFriendLinkBO,
@@ -36,7 +38,19 @@ public class FriendLinkController extends BaseController implements IFriendLinkC
         BeanUtils.copyProperties(saveFriendLinkBO,friendLinkMO);
         friendLinkMO.setCreateTime(LocalDateTime.now());
         friendLinkMO.setUpdateTime(LocalDateTime.now());
-        friendLinkBiz.saveOrUpdateFriendLink(friendLinkMO);
+        friendLinkService.saveOrUpdateFriendLink(friendLinkMO);
+        return R.ok();
+    }
+
+    @Override
+    public R getFriendLinkList() {
+        List<FriendLinkMO> friendLinkMOS = friendLinkService.queryAllFriendLinkList();
+        return R.ok(friendLinkMOS);
+    }
+
+    @Override
+    public R delete(String linkId) {
+        friendLinkService.delete(linkId);
         return R.ok();
     }
 }

@@ -5,7 +5,10 @@ import com.imooc.admin.iservice.IFriendLinkService;
 import com.imooc.admin.repository.FriendLinkRepository;
 import com.imooc.model.mo.FriendLinkMO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -24,5 +27,17 @@ public class FriendLinkBiz implements IFriendLinkService {
     @Override
     public void saveOrUpdateFriendLink(FriendLinkMO friendLinkMO) {
         friendLinkRepository.save(friendLinkMO);
+    }
+
+    @Override
+    public List<FriendLinkMO> queryAllFriendLinkList() {
+        //     TODO 分页查询的方法
+        //      PageRequest.of();
+        return friendLinkRepository.findAll();
+    }
+
+    @Override
+    public void delete(String linkId) {
+        friendLinkRepository.deleteById(linkId);
     }
 }

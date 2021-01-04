@@ -49,4 +49,13 @@ public interface IFriendLinkControllerApi {
     @PostMapping("/saveOrUpdateFriendLink")
     R saveOrUpdateFriendLink(@RequestBody @Valid SaveFriendLinkBO saveFriendLinkBO,
                  BindingResult bindingResult);
+
+    @ApiOperation(value = "查询友情链接列表", notes = "查询友情链接列表", httpMethod = "POST")
+    @PostMapping("/getFriendLinkList")
+    R getFriendLinkList();
+
+    @ApiOperation(value = "删除友情链接", notes = "删除友情链接", httpMethod = "POST")
+    @PostMapping("/delete")
+    R delete(@RequestParam String linkId);
+
 }

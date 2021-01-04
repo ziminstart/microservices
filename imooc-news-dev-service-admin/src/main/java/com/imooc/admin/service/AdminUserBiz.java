@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.imooc.admin.iservice.IAdminUserService;
 import com.imooc.admin.mapper.AdminUserMapper;
+import com.imooc.api.service.IBaseService;
 import com.imooc.exception.GraceException;
 import com.imooc.grace.result.ResponseStatusEnum;
 import com.imooc.model.bo.NewAdminBO;
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * <p>
@@ -30,7 +30,7 @@ import java.util.List;
  * @since 2020-12-09
  */
 @Service
-public class AdminUserBiz extends ServiceImpl<AdminUserMapper, AdminUser> implements IAdminUserService {
+public class AdminUserBiz extends ServiceImpl<AdminUserMapper, AdminUser> implements IAdminUserService, IBaseService {
 
     @Autowired
     public AdminUserMapper adminUserMapper;
@@ -79,17 +79,4 @@ public class AdminUserBiz extends ServiceImpl<AdminUserMapper, AdminUser> implem
         return setterPagedGrid(adminUserPages);
     }
 
-    /**
-     * 设置表格的回显数据
-     * @param pageLists
-     * @return
-     */
-    private PagedGridResult setterPagedGrid(Page<?> pageLists){
-        PagedGridResult pagedGridResult = new PagedGridResult();
-        pagedGridResult.setPage(pageLists.getCurrent());
-        pagedGridResult.setTotal(pageLists.getTotal());
-        pagedGridResult.setRows(pageLists.getRecords());
-        pagedGridResult.setRecords(pageLists.getPages());
-        return pagedGridResult;
-    }
 }
