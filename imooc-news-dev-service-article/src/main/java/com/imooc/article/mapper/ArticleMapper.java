@@ -3,6 +3,7 @@ package com.imooc.article.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.imooc.model.pojo.Article;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * <p>
@@ -14,5 +15,8 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ArticleMapper extends BaseMapper<Article> {
+
+    @Update("UPDATE  article SET is_appoint = 0 WHERE publish_time <= NOW() AND is_appoint = 1")
+    void updateAppointToPublish();
 
 }
