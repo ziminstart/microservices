@@ -33,6 +33,7 @@ public interface IFriendLinkService {
     /**
      * 删除友情链接
      */
-    void delete
-    (String linkId);
+    void delete(String linkId);
+
+    List<FriendLinkMO> queryPortalAllFriendLinkList();
 }

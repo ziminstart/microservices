@@ -11,6 +11,7 @@ import com.imooc.model.vo.UserAccountInfoVO;
 import com.imooc.user.iservice.IAppUserService;
 import com.imooc.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.jsqlparser.expression.UserVariable;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
@@ -19,6 +20,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,9 +42,7 @@ public class UserController extends BaseController implements IUserControllerApi
             return R.errorCustom(ResponseStatusEnum.UN_LOGIN);
         }
         //根据userId查询用户信息
-        AppUser user = getUser(userId);
-        AppUserVO userVO = new AppUserVO();
-        BeanUtils.copyProperties(user, userVO);
+        AppUserVO userVO= getBasicUserInfo(userId);
         return R.ok(userVO);
     }
 
@@ -78,6 +79,21 @@ public class UserController extends BaseController implements IUserControllerApi
         return R.ok();
     }
 
+    @Override
+    public R queryByIds(String userIds) {
+        if (StringUtils.isEmpty(userIds)){
+            return R.errorCustom(ResponseStatusEnum.USER_NOT_EXIST_ERROR);
+        }
+
+        List<AppUserVO> publishUserList = new ArrayList<>();
+        List<String> publishIds = JsonUtils.jsonToList(userIds, String.class);
+        for (String publishId : publishIds) {
+            AppUserVO userVO= getBasicUserInfo(publishId);
+            publishUserList.add(userVO);
+        }
+        return R.ok(publishUserList);
+    }
+
     public AppUser getUser(String userId) {
         //查询判断redis中是否包含用户信息，如果包含，则直接查询后返回
         String userJson = redis.get(REDIS_USER_INFO + ":" + userId);
@@ -91,6 +107,14 @@ public class UserController extends BaseController implements IUserControllerApi
             redis.set(REDIS_USER_INFO + ":" + userId, JsonUtils.objectToJson(user));
         }
         return user;
+    }
+
+    private AppUserVO getBasicUserInfo(String userId){
+        //根据userId查询用户信息
+        AppUser user = getUser(userId);
+        AppUserVO userVO = new AppUserVO();
+        BeanUtils.copyProperties(user, userVO);
+        return userVO;
     }
 
 }

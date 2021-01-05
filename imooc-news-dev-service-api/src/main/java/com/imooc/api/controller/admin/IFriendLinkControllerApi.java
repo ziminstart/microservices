@@ -58,4 +58,9 @@ public interface IFriendLinkControllerApi {
     @PostMapping("/delete")
     R delete(@RequestParam String linkId);
 
+
+    @ApiOperation(value = "门户端查询友情链接列表", notes = "门户端查询友情链接列表", httpMethod = "POST")
+    @PostMapping("/portal/list")
+    R queryPortalAllFriendLinkList();
+
 }

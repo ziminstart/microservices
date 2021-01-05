@@ -5,7 +5,6 @@ import com.imooc.grace.result.R;
 import com.imooc.model.bo.NewArticleBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.models.auth.In;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,31 +30,14 @@ import javax.validation.Valid;
  * 此外，本工程的接口其实就是一套规范。实现都是由各自的工程去做的处理
  */
 @Api(value = "文章业务的controller", tags = {"文章业务的controller"})
-@RequestMapping("article")
-public interface IArticleControllerApi {
+@RequestMapping("portal/article")
+public interface IArticlePortalControllerApi {
 
 
-    @ApiOperation(value = "创建文章的接口", notes = "创建文章的接口", httpMethod = "POST")
-    @PostMapping("/createArticle")
-    R createArticle(@RequestBody @Valid NewArticleBO newArticleBO, BindingResult bindingResult);
-
-
-    @ApiOperation(value = "查询用户所有的文章列表", notes = "查询用户所有的文章列表", httpMethod = "POST")
-    @PostMapping("/queryMyList")
-    R queryMyList(@RequestParam String userId,
-                  @RequestParam String keyword,
-                  @RequestParam Integer status,
-                  @RequestParam String startDate,
-                  @RequestParam String endDate,
-                  @RequestParam Integer page,
-                  @RequestParam Integer pageSize);
-
-
-    @ApiOperation(value = "管理员对文章审核通过或者失败", notes = "管理员对文章审核通过或者失败", httpMethod = "POST")
-    @PostMapping("/doReview")
-    R doReview(@RequestParam String articleId,
-               @RequestParam Integer passOrNot);
-
-
-
+    @ApiOperation(value = "首页查询文章列表", notes = "首页查询文章列表", httpMethod = "GET")
+    @GetMapping("/list")
+    R queryAllList(@RequestParam String keyword,
+                    @RequestParam Integer category,
+                    @RequestParam Integer page,
+                    @RequestParam Integer pageSize);
 }

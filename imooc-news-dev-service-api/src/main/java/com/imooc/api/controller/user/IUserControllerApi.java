@@ -45,4 +45,9 @@ public interface IUserControllerApi {
     R updateUserInfo(@RequestBody @Valid UpdateUserInfoBO updateUserInfoBO, BindingResult result);
 
 
+    @ApiOperation(value = "根据用户的ids查询用户列表", notes = "根据用户的ids查询用户列表", httpMethod = "GET")
+    @GetMapping("/queryByIds")
+    R queryByIds(@RequestParam String userIds);
+
+
 }

@@ -53,4 +53,10 @@ public class FriendLinkController extends BaseController implements IFriendLinkC
         friendLinkService.delete(linkId);
         return R.ok();
     }
+
+    @Override
+    public R queryPortalAllFriendLinkList() {
+        List<FriendLinkMO> friendLinkMOS = friendLinkService.queryPortalAllFriendLinkList();
+        return R.ok(friendLinkMOS);
+    }
 }
