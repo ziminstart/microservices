@@ -43,6 +43,7 @@ public class UserController extends BaseController implements IUserControllerApi
         }
         //根据userId查询用户信息
         AppUserVO userVO= getBasicUserInfo(userId);
+        //查询redis
         return R.ok(userVO);
     }
 
@@ -114,6 +115,8 @@ public class UserController extends BaseController implements IUserControllerApi
         AppUser user = getUser(userId);
         AppUserVO userVO = new AppUserVO();
         BeanUtils.copyProperties(user, userVO);
+        userVO.setMyFansCounts(getCountsFromRedis(REDIS_WRITER_FANS_COUNTS + ":" + userId));
+        userVO.setMyFansCounts(getCountsFromRedis(REDIS_MY_FOLLOW_COUNTS+ ":" + userId));
         return userVO;
     }
 

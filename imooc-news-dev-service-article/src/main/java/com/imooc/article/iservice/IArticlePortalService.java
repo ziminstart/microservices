@@ -4,7 +4,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.imooc.model.bo.NewArticleBO;
 import com.imooc.model.pojo.Article;
 import com.imooc.model.pojo.Category;
+import com.imooc.model.vo.ArticleDetailVO;
 import com.imooc.utils.PagedGridResult;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,6 +19,7 @@ import com.imooc.utils.PagedGridResult;
  */
 public interface IArticlePortalService extends IService<Article> {
 
+
     /**
      * 首页查询文章列表
      * @param keyword
@@ -24,6 +28,29 @@ public interface IArticlePortalService extends IService<Article> {
      * @param pageSize
      * @return
      */
-    public PagedGridResult queryIndexArticleList(String keyword, Integer category, Integer page, Integer pageSize);
+    PagedGridResult queryIndexArticleList(String keyword, Integer category, Integer page, Integer pageSize);
 
+
+    /**
+     * 首页查询热闻列表
+     * @return
+     */
+    List<Article> queryHotArticleList();
+
+    /**
+     * 查询作家发布的所有文章列表
+     */
+    PagedGridResult queryArticleListOfWriter(String writerId,
+                                                    Integer page,
+                                                    Integer pageSize);
+
+    /**
+     * 作家页面查询近期佳文
+     */
+    PagedGridResult queryGoodArticleListOfWriter(String writerId);
+
+    /**
+     * 查询文章详情
+     */
+    ArticleDetailVO queryDetail(String articleId);
 }

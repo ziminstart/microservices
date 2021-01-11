@@ -5,9 +5,12 @@ import com.imooc.grace.result.R;
 import com.imooc.model.bo.NewArticleBO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -40,4 +43,36 @@ public interface IArticlePortalControllerApi {
                     @RequestParam Integer category,
                     @RequestParam Integer page,
                     @RequestParam Integer pageSize);
+
+
+
+    @GetMapping("queryArticleListOfWriter")
+    @ApiOperation(value = "查询作家发布的所有文章列表", notes = "查询作家发布的所有文章列表", httpMethod = "GET")
+    R queryArticleListOfWriter(@RequestParam String writerId,
+                                                    @ApiParam(name = "page", value = "查询下一页的第几页", required = false)
+                                                    @RequestParam Integer page,
+                                                    @ApiParam(name = "pageSize", value = "分页的每一页显示的条数", required = false)
+                                                    @RequestParam Integer pageSize);
+
+    @GetMapping("queryGoodArticleListOfWriter")
+    @ApiOperation(value = "作家页面查询近期佳文", notes = "作家页面查询近期佳文", httpMethod = "GET")
+    R queryGoodArticleListOfWriter(@RequestParam String writerId);
+
+    @GetMapping("detail")
+    @ApiOperation(value = "文章详情查询", notes = "文章详情查询", httpMethod = "GET")
+    R detail(@RequestParam String articleId);
+
+    @ApiOperation(value = "首页查询热闻列表", notes = "首页查询热闻列表", httpMethod = "GET")
+    @GetMapping("/hotList")
+    R hotList();
+
+
+
+    @ApiOperation(value = "阅读文章，文章阅读量累加", notes = "阅读文章，文章阅读量累加", httpMethod = "POST")
+    @PostMapping("/readArticle")
+    R readArticle(@RequestParam String articleId, HttpServletRequest request);
+
+
 }
+
+

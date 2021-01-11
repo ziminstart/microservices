@@ -23,7 +23,6 @@ public class IndexArticleVO implements Serializable {
 
     private String id;
     private String title;
-    private String content;
     private Integer categoryId;
     private Integer articleType;
     private String articleCover;
@@ -37,5 +36,7 @@ public class IndexArticleVO implements Serializable {
     private Integer isDelete;
     private LocalDateTime createTime;
     private LocalDateTime updateTime;
-    private AppUserVO appUserVO;
+    private String content;
+
+    private AppUserVO publisherVO;
 }
